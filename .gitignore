@@ -1,0 +1,108 @@
+# OS / Editor
+.DS_Store
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Node / Web
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Go / Build
+bin/
+tmp/
+*.out
+*.test
+coverage/
+
+# Terraform / Docker
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+docker-compose.override.yml
+
+# Generated clients / codegen (adjust if you want to check in)
+**/api/generated/
+
+# Logs
+*.log
+logs/
+
+# Others
+*.iml
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Go
+*.test
+*.out
+go.work
+vendor/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.eslintcache
+
+# Build outputs
+build/
+dist/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Docker
+docker-compose.override.yml
+
+# Generated files
+**/generated/
+**/api/generated/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+

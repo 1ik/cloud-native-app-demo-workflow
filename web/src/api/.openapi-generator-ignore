@@ -1,0 +1,11 @@
+# Ignore build info and meta
+.openapi-generator/
+*.iml
+mvnw*
+gradlew*
+pom.xml
+package-lock.json
+node_modules/
+
+# Keep generated code checked in (remove if you want to ignore)
+
