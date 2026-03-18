@@ -5,9 +5,9 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"errors"
+	"log"
 	"os"
 	"time"
-	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/redis/go-redis/v9"
@@ -105,4 +105,3 @@ func HitHandler(rdb *redis.Client) gin.HandlerFunc {
 		})
 	}
 }
-

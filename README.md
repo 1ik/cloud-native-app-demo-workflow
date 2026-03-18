@@ -4,6 +4,9 @@
 
 This is a **learning-focused project** to master cloud-native development workflows. The app itself is intentionally minimal—a simple API + frontend used as a sandbox—while we focus on infrastructure, delivery, and operational patterns.
 
+## Important
+Read `.personal/AGENTS.md`.
+
 ### What We're Building (End Goal)
 
 A small reference app that:
@@ -16,7 +19,7 @@ A small reference app that:
 **We are NOT building the full product yet.**
 
 **Learning Objectives:**
-1. ✅ Local development with Docker Compose and Tilt (Kubernetes)
+1. 🧱 Local cloud-native dev workflow (being rebuilt piece-by-piece)
 2. ✅ OpenAPI code generation (type-safe APIs)
 3. ✅ Infrastructure as Code (Terraform)
 4. ✅ CI/CD pipelines (GitHub Actions)
@@ -27,7 +30,7 @@ A small reference app that:
 ```
 Local Development → Git → CI/CD → Cloud Deployment
      ↓                ↓      ↓          ↓
-  Docker/Tilt    GitHub   Actions   AWS (ECS/EKS)
+  K8s/Tilt/GitOps GitHub  Actions   AWS (EKS/ECS)
 ```
 
 ## 📁 Project Structure
@@ -42,15 +45,11 @@ cloudnativeapp/
 │   ├── src/            # React source code
 │   ├── Dockerfile      # Production container
 │   └── package.json
-├── infrastructure/       # Infrastructure as Code
-│   ├── docker-compose.yml  # Local development (Docker Compose)
-│   ├── Tiltfile         # Local Kubernetes development (Tilt)
-│   └── terraform/       # AWS infrastructure (coming later)
+├── infrastructure/       # Infrastructure as Code (rebuilding from scratch)
 ├── api/                 # OpenAPI specification (coming later)
 ├── docs/                # Learning documentation
 │   ├── project-vision.md
 │   ├── learning-path.md
-│   ├── module-1-local-dev.md
 │   └── ...
 └── README.md
 ```
@@ -59,39 +58,28 @@ cloudnativeapp/
 
 ### Prerequisites
 
-- **Docker** and **Docker Compose** (for local development)
-- **Kubernetes** (Docker Desktop K8s, minikube, or kind) + **Tilt** (for K8s dev)
+- **Docker**
+- **Kubernetes** (Docker Desktop K8s, minikube, or kind)
+- **Tilt** (when we reintroduce it)
 - **Go** 1.21+
 - **Node.js** 18+
 - **AWS CLI** (for later modules)
 
 ### Quick Start
 
-#### Option 1: Docker Compose (Simpler)
+The local cloud-native dev environment is intentionally being rebuilt from zero (to build muscle memory). For now, run services directly:
 
 ```bash
-# Start all services
-docker-compose -f infrastructure/docker-compose.yml up
-
-# Backend API: http://localhost:8080
-# Frontend: http://localhost:3000
-```
-
-#### Option 2: Tilt (Kubernetes - Advanced)
-
-```bash
-# Start Tilt (requires local Kubernetes cluster)
-tilt up
-
-# Access Tilt UI: http://localhost:10350
-# Services automatically deployed to local K8s
+task server:run
+task frontend:install
+task frontend:start
 ```
 
 ## 📚 Learning Path
 
 See [docs/](docs/) for detailed guides:
 
-1. **Module 1**: Local Development Setup (Docker Compose + Tilt)
+1. **Module 1**: Local cloud-native dev workflow (rebuild from scratch)
 2. **Module 2**: OpenAPI Code Generation
 3. **Module 3**: Infrastructure as Code (Terraform)
 4. **Module 4**: CI Pipeline (GitHub Actions)
@@ -111,7 +99,7 @@ See [docs/](docs/) for detailed guides:
 - Build interview-ready cloud-native skills
 
 **Workflow Focus:**
-1. ✅ Local development (Docker Compose + Tilt)
+1. 🧱 Local cloud-native dev workflow (rebuild from scratch)
 2. ✅ Git workflow (feature branches, PRs)
 3. ✅ CI/CD pipelines (automated testing & deployment)
 4. ✅ Cloud deployment (AWS)
@@ -121,7 +109,6 @@ See [docs/](docs/) for detailed guides:
 
 - [Project Vision](docs/project-vision.md) - What we're building and why
 - [Learning Path](docs/learning-path.md) - Complete learning roadmap
-- [Module 1: Local Development](docs/module-1-local-dev.md) - Docker Compose & Tilt setup
 
 ## 🏗️ Current Status
 
@@ -129,12 +116,11 @@ See [docs/](docs/) for detailed guides:
 - [x] Project structure and documentation
 - [x] Minimal Go API (Hello World)
 - [x] Minimal React frontend (Hello World)
-- [x] Docker Compose setup with hot-reload
-- [x] Tilt setup for Kubernetes development
+- [ ] Local cloud-native dev setup (rebuilding from scratch)
 - [ ] CI/CD pipeline (Next: Module 4)
 - [ ] Cloud deployment (Next: Module 6)
 
-**Current Focus:** Testing local development setup, then moving to OpenAPI code generation (Module 2)
+**Current Focus:** Rebuilding local cloud-native development setup from scratch, then moving to OpenAPI code generation (Module 2)
 
 **Next Phase:** CI/CD and cloud deployment workflows, then product development
 

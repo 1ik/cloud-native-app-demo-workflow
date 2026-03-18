@@ -1,0 +1,40 @@
+version: "3"
+
+tasks:
+  # Backend / API tasks
+  server:run:
+    desc: Run the Go API server locally
+    dir: backend
+    cmds:
+      - go run ./cmd
+
+  server:build:
+    desc: Build the Go API server binary
+    dir: backend
+    cmds:
+      - go build -o bin/api ./cmd
+
+  server:test:
+    desc: Run backend Go tests
+    dir: backend
+    cmds:
+      - go test ./...
+
+  # Frontend / web tasks
+  frontend:install:
+    desc: Install frontend dependencies
+    dir: web
+    cmds:
+      - npm install
+
+  frontend:start:
+    desc: Start frontend development server
+    dir: web
+    cmds:
+      - npm run dev
+
+  frontend:build:
+    desc: Build frontend for production
+    dir: web
+    cmds:
+      - npm run build

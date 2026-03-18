@@ -16,8 +16,7 @@ Each module includes:
 
 ### Learning Objectives
 - Understand containerization basics
-- Set up local development with Docker Compose
-- Set up local development with Tilt (Kubernetes)
+- Rebuild local cloud-native development setup from scratch (piece-by-piece)
 - Learn hot-reload workflows
 - Understand service orchestration
 
@@ -30,14 +29,13 @@ Each module includes:
 ### What We'll Build
 - Minimal Go API (health endpoint)
 - Minimal React app (Hello World)
-- Docker Compose setup
-- Tilt setup for Kubernetes
+- Local Kubernetes manifests (first), then Tilt
 - PostgreSQL and Redis (for later)
 
 ### Key Concepts
 - Dockerfile
-- docker-compose.yml
-- Tiltfile
+- Kubernetes manifests (YAML)
+- Tiltfile (later)
 - Volume mounts (hot-reload)
 - Service networking
 - Environment variables
@@ -230,7 +228,7 @@ Each module includes:
 ## Learning Path Summary
 
 **Phase 1: Local Development** (Modules 1-2)
-- Docker Compose + Tilt setup
+- Rebuild local K8s + Tilt setup (from scratch)
 - OpenAPI code generation
 - **Goal**: Develop locally with containers/K8s
 

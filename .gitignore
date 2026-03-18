@@ -5,6 +5,7 @@
 *~
 .idea/
 .vscode/
+.personal/
 
 # Node / Web
 node_modules/

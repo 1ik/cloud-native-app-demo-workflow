@@ -167,7 +167,7 @@ Container (backend)  ← Your app
 
 ## 📝 Understanding Our Manifests
 
-Let's look at our backend deployment:
+Let's look at a backend deployment example:
 
 ```yaml
 apiVersion: apps/v1        # K8s API version
@@ -262,7 +262,7 @@ kubectl port-forward <pod-name> 8080:8080
 
 ```bash
 # Apply manifest
-kubectl apply -f k8s/base/backend/deployment.yaml
+kubectl apply -f <path-to-your-manifest>.yaml
 
 # Delete resource
 kubectl delete deployment backend
