@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/1ik/cloud-native-app-demo-workflow
     targetRevision: HEAD
-    path: infrastructure/k8s/03-redis
+    path: infrastructure/k8s
 
   destination:
     server: https://kubernetes.default.svc
