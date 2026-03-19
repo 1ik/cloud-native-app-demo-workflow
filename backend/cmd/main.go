@@ -32,7 +32,7 @@ func main() {
 	// Health check endpoint
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"status": "healthy",
+			"status":  "healthy",
 			"service": "cloudnativeapp-api",
 		})
 	})
@@ -47,6 +47,7 @@ func main() {
 
 	// Hit counter endpoint
 	r.GET("/hit", HitHandler(rdb))
+	r.GET("/hit2", HitHandler(rdb))
 
 	// Start server
 	port := ":8080"
@@ -55,4 +56,3 @@ func main() {
 		log.Fatal("Failed to start server:", err)
 	}
 }
-

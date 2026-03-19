@@ -1,0 +1,32 @@
+# Tell Tilt which K8s YAMLs define our app
+k8s_yaml([
+  './01-backend/deployment.yaml',
+  './01-backend/service.yaml',
+  './02-frontend/deployment.yaml',
+  './02-frontend/service.yaml',
+  './03-redis/deployment.yaml',
+  './03-redis/service.yaml',
+  './04-postgres/deployment.yaml',
+  './04-postgres/service.yaml',
+])
+
+# Backend image + live dev
+docker_build(
+    'backend',
+    '../backend',
+    dockerfile='../backend/Dockerfile',
+)
+
+k8s_resource('backend', port_forwards='4545:8080')
+
+# Frontend image + live dev
+docker_build(
+    'frontend',
+    '../web',
+    dockerfile='../web/Dockerfile',
+)
+
+k8s_resource('frontend', port_forwards='3000:80')
+
+# Let Tilt manage resources on kind
+allow_k8s_contexts(['kind-cna'])

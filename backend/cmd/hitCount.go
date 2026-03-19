@@ -24,6 +24,8 @@ const (
 // newRedisClient creates a Redis client using REDIS_HOST env (default redis:6379).
 func newRedisClient() *redis.Client {
 	host := getEnv("REDIS_HOST", "redis:6379")
+	log.Printf("using redis host: %s", host)
+
 	return redis.NewClient(&redis.Options{
 		Addr: host,
 	})
@@ -50,17 +52,21 @@ var osHostname = os.Hostname
 
 // acquireLock tries to obtain a lock with retries.
 func acquireLock(ctx context.Context, rdb *redis.Client, key, value string, ttl time.Duration) error {
+	log.Printf("acquireLock: trying to acquire lock...")
 	for i := 0; i < lockRetries; i++ {
 		ok, err := rdb.SetNX(ctx, key, value, ttl).Result()
 		if err != nil {
+			log.Printf("acquireLock: SETNX error: %v", err)
 			return err
 		}
 		if ok {
-			log.Printf("lock acquired key=%s val=%s", key, value)
+			log.Printf("acquireLock: lock acquired key=%s val=%s", key, value)
 			return nil
 		}
+		log.Printf("acquireLock: lock already held, retry %d", i+1)
 		time.Sleep(lockBackoff)
 	}
+	log.Printf("acquireLock: giving up after %d retries", lockRetries)
 	return errors.New("lock not acquired")
 }
 
@@ -79,6 +85,7 @@ func releaseLock(ctx context.Context, rdb *redis.Client, key, value string) {
 // HitHandler increments a shared counter with distributed locking and returns hostname + count.
 func HitHandler(rdb *redis.Client) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		log.Printf("HitHandler: starting...")
 		ctx := c.Request.Context()
 
 		// unique lock value
@@ -86,6 +93,7 @@ func HitHandler(rdb *redis.Client) gin.HandlerFunc {
 		_, _ = rand.Read(buf)
 		lockVal := hex.EncodeToString(buf)
 
+		log.Printf("HitHandler: acquiring lock...")
 		if err := acquireLock(ctx, rdb, lockKey, lockVal, lockTTL); err != nil {
 			c.JSON(503, gin.H{"error": "busy, try again"})
 			return

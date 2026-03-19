@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 type HealthResponse = { status: string; service: string }
 type HitResponse = { count: number; hostname: string }
 
-const apiBase = import.meta.env.VITE_API_URL ?? 'http://localhost:8080'
+const apiBase = 'http://localhost:4545';
 
 function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null)
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div>
-      <h1>CloudNativeApp - Hello World</h1>
+      <h1>CloudNativeApp v7- Hello World</h1>
       <p>This is a minimal React app for learning cloud-native workflows.</p>
 
       <div style={{ marginTop: '2rem', padding: '1rem', background: '#1a1a1a', borderRadius: '8px' }}>

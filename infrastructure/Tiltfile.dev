@@ -1,0 +1,35 @@
+k8s_yaml([
+  './k8s/01-backend/deployment.yaml',
+  './k8s/01-backend/service.yaml',
+  './k8s/02-frontend/deployment.yaml',
+  './k8s/02-frontend/service.yaml',
+  './k8s/03-redis/deployment.yaml',
+  './k8s/03-redis/service.yaml',
+  './k8s/04-postgres/deployment.yaml',
+  './k8s/04-postgres/service.yaml',
+])
+
+docker_build(
+  'backend',
+  '../backend',
+  dockerfile='../backend/Dockerfile.dev',
+  live_update=[
+    sync('../backend', '/app'),
+  ],
+)
+k8s_resource('backend', port_forwards='4545:8080')
+
+docker_build(
+  'frontend',
+  '../web',
+  dockerfile='../web/Dockerfile.dev',
+  live_update=[
+    sync('../web/src', '/app/src'),
+    sync('../web/public', '/app/public'),
+    sync('../web/index.html', '/app/index.html'),
+    sync('../web/vite.config.ts', '/app/vite.config.ts'),
+  ],
+)
+k8s_resource('frontend', port_forwards='3000:3000')
+
+allow_k8s_contexts(['kind-cna'])
