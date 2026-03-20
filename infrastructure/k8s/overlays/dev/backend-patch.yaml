@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  destination:
+    namespace: dev
+  template:
+    spec:
+      containers:
+        - name: backend
+          imagePullPolicy: Never # kind / local
+          env:
+            - name: GIN_MODE
+              value: "debug"

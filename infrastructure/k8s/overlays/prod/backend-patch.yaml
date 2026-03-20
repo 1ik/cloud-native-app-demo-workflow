@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  destination:
+    namespace: prod
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: backend
+          imagePullPolicy: IfNotPresent # prod / DOCR
+          env:
+            - name: GIN_MODE
+              value: "release"
