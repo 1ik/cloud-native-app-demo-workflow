@@ -38,3 +38,16 @@ tasks:
     dir: web
     cmds:
       - npm run build
+
+  k8s:validate-overlays:
+    desc: Run kubectl kustomize on dev/staging/prod overlays; fail on build error or invalid Deployment destination
+    cmds:
+      - |
+        set -e
+        for o in dev staging prod; do
+          echo "== infrastructure/k8s/overlays/${o} =="
+          out="$(kubectl kustomize "infrastructure/k8s/overlays/${o}")"
+          echo "${out}" | grep -q '^  destination:' && { echo "FAIL: rendered YAML contains '  destination:' (invalid on Deployment)"; exit 1; } || true
+          echo "kustomize: OK (no top-level '  destination:' lines)"
+        done
+        echo "All overlays validated."

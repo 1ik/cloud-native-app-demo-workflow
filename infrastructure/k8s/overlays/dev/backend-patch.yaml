@@ -12,3 +12,13 @@ spec:
           env:
             - name: GIN_MODE
               value: "debug"
+            - name: GMAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-credentials
+                  key: GMAIL_USERNAME
+            - name: GMAIL_APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-credentials
+                  key: GMAIL_APP_PASSWORD

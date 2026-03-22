@@ -6,6 +6,7 @@ resources:
   - ../../02-frontend
   - ../../03-redis
   - ../../04-postgres
+  - gmail-credentials.sealed.dev.yaml
 
 labels:
   - includeSelectors: true

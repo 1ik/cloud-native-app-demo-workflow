@@ -3,12 +3,32 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
+// logGmailEnv logs Gmail-related env vars at startup for verifying SecretKeyRef wiring.
+// It intentionally does not log the app password value (logs are often copied/shared).
+func logGmailEnv() {
+	user := os.Getenv("GMAIL_USERNAME")
+	pass, passOK := os.LookupEnv("GMAIL_APP_PASSWORD")
+
+	log.Printf("gmail env: GMAIL_USERNAME=%q", user)
+	switch {
+	case !passOK:
+		log.Print("gmail env: GMAIL_APP_PASSWORD not set (missing env var)")
+	case pass == "":
+		log.Print("gmail env: GMAIL_APP_PASSWORD set but empty")
+	default:
+		log.Printf("gmail env: GMAIL_APP_PASSWORD is set (length=%d)", len(pass))
+	}
+}
+
 func main() {
+	logGmailEnv()
+
 	// Create Gin router
 	r := gin.Default()
 
